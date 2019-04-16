@@ -1,6 +1,6 @@
 package pers.qly.deep.in.java.stage2.lesson8.collection.algorithm;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 /**
  * @Author: NoNo
@@ -22,19 +22,29 @@ public class InsertionSort<T extends Comparable<T>> implements Sort<T> {
             // [j = 0] = 3, [i = 1] = 1, temp = [i = 1] = 1
             // [i = 1] = [j = 0](3), [j = 0] = temp =  1
             T temp = values[i]; // 临时变量
-            for (int j = i - 1; j >= 0; j--) {
-                if (temp.compareTo(values[j]) < 1) { // 高位 < 低位
-                    values[i] = values[j]; // 高位获取低位值
-                    values[j] = temp; // 低位获得高位的值
-                }
+            int j = i;
+            while (j > 0 && temp.compareTo(values[j - 1]) < 0) {
+                // 往后移动让出插入空间
+                values[j] = values[j - 1];
+                j--;
             }
+            // 插入 values[i] 到对应位置
+            values[j] = temp;
+            System.out.printf("第 %d 轮：%s\n", i, Arrays.toString(values));
         }
     }
 
     public static void main(String[] args) {
-        Integer[] values = Sort.of(3, 1, 2, 5, 4);
+        System.out.println("====== 一般情况 ======");
+        Integer[] values = Sort.of(3, 2, 1, 5, 4);
         Sort<Integer> sort = new InsertionSort<>();
         sort.sort(values);
-        Stream.of(values).forEach(System.out::println);
+        System.out.println(Arrays.toString(values));
+
+        System.out.println("====== 完全逆序 ======");
+        values = Sort.of(5, 4, 3, 2, 1);
+        sort = new InsertionSort<>();
+        sort.sort(values);
+        System.out.println(Arrays.toString(values));
     }
 }

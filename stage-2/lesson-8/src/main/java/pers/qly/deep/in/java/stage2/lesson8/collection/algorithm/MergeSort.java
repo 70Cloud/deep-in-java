@@ -15,7 +15,7 @@ public class MergeSort<T extends Comparable<T>> implements Sort<T> {
         sort(values, 0, values.length - 1);
     }
 
-    private void merge(T[] values, int low, int mid, int high) {
+    private void merge(Comparable[] values, int low, int mid, int high) {
         // 找到子数组进行合并
 
         // [3, 1, 2, 5, 4], n = 5
@@ -58,27 +58,28 @@ public class MergeSort<T extends Comparable<T>> implements Sort<T> {
 
         int k = low; // k 临时保存低位索引值
         int i = 0, j = 0;
-        for (; i < n1 && j < n2; i++, j++) {
+        for (; i < n1 && j < n2; k++) {
             // 如果 a1 与 a2 比较
             if (a1[i].compareTo(a2[j]) < 1) { // <=
-                values[k] = (T) a1[i];// 低位数值
+                values[k] = a1[i];// 低位数值
+                i++;
             } else { // >
-                values[k] = (T) a2[j];
+                values[k] = a2[j];
+                j++;
             }
-            k++;
         }
 
         // i = 2,n = 3
         // values[k = 0] = 4
 
-        // 复制 a1
+        // 复制 a1 剩余元素
         while (i < n1) {
-            values[k] = (T) a1[i];
+            values[k] = a1[i];
             i++;
-            j++;
+            k++;
         }
         while (j < n2) {
-            values[k] = (T) a2[j];
+            values[k] = a2[j];
             j++;
             k++;
         }
@@ -96,7 +97,7 @@ public class MergeSort<T extends Comparable<T>> implements Sort<T> {
             // Divide
             int mid = (low + high) / 2;
             // 上半部分
-            sort(values, 0, mid);
+            sort(values, low, mid);
             // 下班部分
             sort(values, mid + 1, high);
 
