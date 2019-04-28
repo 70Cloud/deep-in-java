@@ -67,8 +67,6 @@ public class AbstractQueuedSynchronizerDemo {
         System.out.printf("当前线程[%s] 正在等待您的输入\n", Thread.currentThread().getName());
         // I/O 中断线程
         try {
-
-
             // 利用 ReentrantLock 作为 AQS 实现，理解内部数据结构
             lock.lock();
             System.in.read();
