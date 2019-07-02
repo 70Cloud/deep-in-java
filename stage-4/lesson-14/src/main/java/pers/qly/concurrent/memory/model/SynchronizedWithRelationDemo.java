@@ -141,7 +141,7 @@ public class SynchronizedWithRelationDemo {
     private static void threadInterrupt() {
 
         Thread t2 = new Thread(() -> {
-            if (Thread.interrupted()) { // volatile 读 t2 interrupt true and is cleared.
+            if (Thread.interrupted()) { // volatile 读 t2 interrupt true and is cleared. 判断并清除
                 // 会被执行
             }
         });
@@ -154,7 +154,7 @@ public class SynchronizedWithRelationDemo {
 
 
         Thread t3 = new Thread(() -> {
-            if (t2.isInterrupted()) {  // volatile 读 t2 interrupt true
+            if (t2.isInterrupted()) {  // volatile 读 t2 interrupt true  只判断
                 // 会被执行
             }
         });
