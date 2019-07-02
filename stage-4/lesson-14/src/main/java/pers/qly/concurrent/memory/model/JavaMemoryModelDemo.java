@@ -27,7 +27,7 @@ public class JavaMemoryModelDemo {
      *      变量的可见性
      *      引用的原子性：https://docs.oracle.com/javase/tutorial/essential/concurrency/atomic.html
      * 实现：
-     *      大部分利用 C++ volatile 编译时限制重排（内存屏障）
+     *      大部分利用 C++ volatile 编译时限制指令重排（内存屏障）
      *          Memory Barriers：https://www.infoq.com/articles/memory_barriers_jvm_concurrency
      *      部分通过汇编实现
      *      源码快速路径：orderAccess.hpp

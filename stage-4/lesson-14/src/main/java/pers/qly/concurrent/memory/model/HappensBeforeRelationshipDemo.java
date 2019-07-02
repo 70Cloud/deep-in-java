@@ -19,6 +19,7 @@ public class HappensBeforeRelationshipDemo {
     /**
      * If x and y are actions of the same thread and x comes before y in program order,
      * then hb(x, y).
+     * 相同线程顺序操作
      */
     private static void inSameThread() {
         // action1
@@ -28,6 +29,7 @@ public class HappensBeforeRelationshipDemo {
     /**
      * There is a happens-before edge from the end of a constructor of an object to the
      * start of a finalizer (§12.6) for that object
+     * 对象的创建和消亡被不同线程执行
      */
     private static void constructorHappensBeforeFinalizer() {
         // 构造早于销毁（终结）之前
