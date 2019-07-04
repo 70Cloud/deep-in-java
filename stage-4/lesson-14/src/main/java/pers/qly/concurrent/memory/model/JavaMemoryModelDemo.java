@@ -42,6 +42,6 @@ public class JavaMemoryModelDemo {
      * 实现：
      *      利用汇编指令
      *      源码快速路径：atomic.hpp
-     *      
+     *
      */
 }
