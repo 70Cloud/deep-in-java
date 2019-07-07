@@ -29,6 +29,7 @@ public class AbstractQueuedSynchronizerDemo {
 
         // 一个线程获得锁，另外一个线程入队
 
+        // 特殊情况（很少发生）
         // main -> thread-2.interrupt()
         // sub-threads
         List<Thread> threads = new ArrayList<>();
@@ -36,8 +37,8 @@ public class AbstractQueuedSynchronizerDemo {
         executorService.submit(() -> {
             threads.add(Thread.currentThread());
             action();
-
         }); // thread-1
+
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-1
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-2
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-3
