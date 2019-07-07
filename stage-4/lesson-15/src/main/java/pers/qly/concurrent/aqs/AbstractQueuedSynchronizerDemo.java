@@ -39,6 +39,7 @@ public class AbstractQueuedSynchronizerDemo {
             action();
         }); // thread-1
 
+        // 正常情况，假设有 3 个线程
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-1
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-2
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-3
