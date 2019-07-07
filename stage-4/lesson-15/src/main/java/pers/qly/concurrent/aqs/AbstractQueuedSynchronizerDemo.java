@@ -43,8 +43,7 @@ public class AbstractQueuedSynchronizerDemo {
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-1
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-2
         executorService.submit(AbstractQueuedSynchronizerDemo::action); // thread-3
-
-
+        
         // 非公平锁
         // thread-1 unlock -> release -> unpark thread-2 -> thread-2 try acquire
         // thread-4 or thread-5 lock -> try acquire
