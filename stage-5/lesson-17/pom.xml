@@ -11,5 +11,13 @@
 
     <artifactId>lesson-17</artifactId>
 
+    <dependencies>
+        <!-- Apache Commons IO 类库 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
 
+    </dependencies>
 </project>
