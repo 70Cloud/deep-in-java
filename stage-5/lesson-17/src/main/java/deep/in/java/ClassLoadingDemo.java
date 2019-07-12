@@ -24,7 +24,7 @@ public class ClassLoadingDemo {
         // 当前工程相对路径：stage-5/lesson-17
         // 当前工程绝对路径：${user.dir}/stage-5/lesson-17
         // 当前工程 ClassPath ：${user.dir}/stage-5/lesson-17/target/classes
-        // User 类全名：com.segmentfault.deep.in.java.User
+        // User 类全名：deep.in.java.User
         // User.class 文件路径：${ClassPath}/deep/in/java/User.class
 
         String className = "deep.in.java.User";
