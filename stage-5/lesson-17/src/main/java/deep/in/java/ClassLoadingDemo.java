@@ -80,7 +80,6 @@ public class ClassLoadingDemo {
             // 利用 ClassLoader defineClass 方法来定义 Class
             // 可用于动态加载
             return super.defineClass(name, bytes, 0, bytes.length);
-
         }
 
         private byte[] loadBytes(File classFile) {
