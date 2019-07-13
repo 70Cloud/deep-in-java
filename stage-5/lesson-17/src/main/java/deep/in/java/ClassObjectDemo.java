@@ -28,7 +28,7 @@ public class ClassObjectDemo {
     }
 
     private static void isPrimitive(Class klass) {
-        
+
         System.out.printf("类 [%s] 是否属于原生类型：%s\n", klass.getName(), klass.isPrimitive());
     }
 }
