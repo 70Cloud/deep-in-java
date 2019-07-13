@@ -16,7 +16,6 @@ public class ClassObjectDemo {
         Class<?> objectClass = Object.class;
 
         // ClassLoader
-
         // 原生类型也有类对象
         Class<?> intClass = int.class;
 
@@ -29,6 +28,7 @@ public class ClassObjectDemo {
     }
 
     private static void isPrimitive(Class klass) {
+        
         System.out.printf("类 [%s] 是否属于原生类型：%s\n", klass.getName(), klass.isPrimitive());
     }
 }
