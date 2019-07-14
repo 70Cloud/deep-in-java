@@ -19,7 +19,7 @@ public class ClassLoadingDemo {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
         // 加载某个 Class 对象
-        // User user = ... -> load class
+        // User user = ... -> 当 User 执行的时候第一步就 load class
 
         // 当前工程相对路径：stage-5/lesson-17
         // 当前工程绝对路径：${user.dir}/stage-5/lesson-17
@@ -37,13 +37,14 @@ public class ClassLoadingDemo {
         // ClassLoader 也是对象，也会被 GC 管理
         MyClassLoader myClassLoader = new MyClassLoader();
         // .class 文件变为字节流 byte[]，再定义 Class 对象
+        // defineClass 中肯定会有校验
         Class<?> userClass = myClassLoader.defineClass(className, classFile);
 
         System.out.println("当前类对象：" + userClass);
         Stream.of(userClass.getDeclaredFields())
-                .forEach(field -> {
-                    System.out.println("当前字段信息：" + field);
-                });
+                .forEach(field ->
+                        System.out.println("当前字段信息：" + field)
+                );
 
         Class<?> userClassFromThreadContextClassLoader = classLoader.loadClass(className);
         // User.class 被 MyClassLoader 加载后，是否与线程上下文加载的 User.class 对象是否一致？
@@ -54,13 +55,13 @@ public class ClassLoadingDemo {
         // 重新替换掉线程上下文 ClassLoader
         // myClassLoader -> Thread.currentThread().getContextClassLoader()
         Thread.currentThread().setContextClassLoader(myClassLoader);
-        // 老的线程上下文 ClassLoader 是 MyClassLoader 的 parent，由于双亲委派，及时是 MyClassLoader 重新调用
+        // 老的线程上下文 ClassLoader 是 MyClassLoader 的 parent，由于双亲委派，即使是 MyClassLoader 重新调用
         // loadClass(String) 方法，也不会重新加载
         Class<?> userClassFromMyClassLoader = classLoader.loadClass(className);
         System.out.println("userClass == userClassFromMyClassLoader ? " +
                 (userClass == userClassFromMyClassLoader));
 
-        // 已加载 Class 是如何实现，目标方法： java.lang.ClassLoader.findLoadedClass0
+        // 已加载 Class 是如何实现的，目标方法： java.lang.ClassLoader.findLoadedClass0
         System.out.println(
                 "userClassFromThreadContextClassLoader == userClassFromMyClassLoader ? " +
                         (userClassFromThreadContextClassLoader == userClassFromMyClassLoader));
@@ -73,7 +74,8 @@ public class ClassLoadingDemo {
             super(Thread.currentThread().getContextClassLoader());
         }
 
-        // 文件 -> 定义某个 Class
+        // 重载
+        // 通过文件 -> 定义某个 Class
         public Class<?> defineClass(String name, File classFile) {
             // File classFile -> byte[]
             byte[] bytes = loadBytes(classFile);

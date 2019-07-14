@@ -13,12 +13,12 @@ public class ClassLoaderDemo {
         // 系统 ClassLoader
         // Java 8 结果：sun.misc.Launcher$AppClassLoader@18b4aac2
         // Java 11 结果：jdk.internal.loader.ClassLoaders$AppClassLoader@14514713
-        System.out.println(ClassLoader.getSystemClassLoader());
+        System.out.println(ClassLoader.getSystemClassLoader()); // 只读
 
         // 应用 ClassLoader
         // Java 8 结果：sun.misc.Launcher$AppClassLoader@18b4aac2
         // Java 11 结果：jdk.internal.loader.ClassLoaders$AppClassLoader@14514713
-        System.out.println(Thread.currentThread().getContextClassLoader());
+        System.out.println(Thread.currentThread().getContextClassLoader()); // 可写
 
         // 如何实现类隔离，通过修改 Thread 上下文 ClassLoader
 
@@ -33,13 +33,17 @@ public class ClassLoaderDemo {
         // 通常，系统或者应用（包括自定义） ClassLoader 均为 URLClassLoader 子类
     }
 
+    /**
+     * 替换 ClassLoader
+     * @param newClassLoader
+     */
     private static void changeClassLoader(ClassLoader newClassLoader){
         Thread currentThread = Thread.currentThread();
-        // 当前 ClassLoader 无法加载 User.class 类，不过该类能被 newClassLoader 加载
+        // 假如当前 ClassLoader 无法加载 User.class 类，不过该类能被 newClassLoader 加载
         ClassLoader previousClassLoader = currentThread.getContextClassLoader();
 
         try {
-            currentThread.setContextClassLoader(newClassLoader);
+            currentThread.setContextClassLoader(newClassLoader); // 需要 setContextClassLoader 安全权限
             // 利用新的 ClassLoader 来加载类
         }catch (Exception e){
             e.printStackTrace();
@@ -48,9 +52,12 @@ public class ClassLoaderDemo {
         }
     }
 
+    /**
+     * 不覆盖类的情况下，进行类隔离
+     */
     private static void loadSomeClasses(){// 兼容或适配老的 ClassLoader 代码
         // JAXB 通过线程上下文 ClassLoader 切换不同实现 SPI
-        // JAXB 1.x 2.x
+        // JAXB 1.x 2.x 混在一起
         // JDK 提供的 API 1.x
         // 第三方包实现 2.x
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
