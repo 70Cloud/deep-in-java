@@ -15,5 +15,7 @@ public class HeapDemo {
 
         // object 被所在方法执行结束后回收
         // new Object() 被 GC 算法来回收
+
+//        main(args);
     }
 }
